@@ -3,16 +3,16 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 // --- IMPORTANT ---
 // Replace these with your actual Supabase project URL and anon key.
 // It's recommended to use environment variables for this in a real-world application.
-const SUPABASE_URL = "https://bjtmhhyrizrnrhlmoxzf.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqdG1oaHlyaXpybnJobG1veHpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4MDkzMTMsImV4cCI6MjA3NDM4NTMxM30.pDFUbTATVkQRhMMvwHSCwfcDadeMXX9gf0YHlZ4PL7o";
+const SUPABASE_URL = "add your project url here";
+const SUPABASE_ANON_KEY = "add your anon key here";
 
 // Your storage bucket name - change this if your bucket has a different name
 export const BUCKET_NAME = "manwha";
 
 // Validate configuration
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY || 
-    SUPABASE_URL === "https://bjtmhhyrizrnrhlmoxzf.supabase.co" || 
-    SUPABASE_ANON_KEY === "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqdG1oaHlyaXpybnJobG1veHpmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4MDkzMTMsImV4cCI6MjA3NDM4NTMxM30.pDFUbTATVkQRhMMvwHSCwfcDadeMXX9gf0YHlZ4PL7o") {
+    SUPABASE_URL === "add your project url here" || 
+    SUPABASE_ANON_KEY === "add your anon key here") {
     console.error("⚠️ Supabase is not configured! Please update SUPABASE_URL and SUPABASE_ANON_KEY in supabase-client.js");
 }
 
