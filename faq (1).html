@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ - Unicomick</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand"><span>unicomick</span></a>
+      <div class="searchbar" role="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="global-search" type="text" placeholder="Search..." aria-label="Search" />
+        <kbd class="hint">Ctrl K</kbd>
+      </div>
+      <nav class="nav-links">
+        <div class="menu dropdown" id="cat-menu">
+          <button class="menu-btn" id="cat-toggle" aria-expanded="false">Categories <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="dropdown-menu" id="cat-panel" hidden>
+            <a href="#">Most Popular Webtoon Right Now</a>
+            <a href="#">Most Popular Manga Right Now</a>
+            <a href="#">Browse Comics by Genre</a>
+            <a href="#">Popular Publishers</a>
+            <a href="#">Popular Groups</a>
+          </div>
+        </div>
+        <a href="/search" class="link">Search</a>
+        <a href="#" class="link">My List</a>
+      </nav>
+      <div class="nav-right">
+        <button class="icon-pill mobile-menu-toggle" id="mobile-menu-btn" title="Menu" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <button class="icon-pill" title="Gender"><i class="fa-solid fa-venus-mars"></i></button>
+        <button class="icon-pill" title="Language"><i class="fa-solid fa-language"></i></button>
+        <a class="icon-pill" title="Profile" href="/profile" aria-label="Profile"><i class="fa-regular fa-user"></i></a>
+        <button class="icon-pill more-menu" title="More"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="panel faq-header">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+        <i class="fa-solid fa-circle-question" style="font-size: 4rem; color: var(--accent); margin-bottom: 1rem; display: block;"></i>
+        <h1 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--text);">Frequently Asked Questions</h1>
+        <p class="muted" style="font-size: 1.1rem; line-height: 1.6;">Find answers to common questions about Unicomick, reading comics, and using our platform.</p>
+      </div>
+    </section>
+
+    <div class="faq-layout">
+      <aside class="faq-sidebar">
+        <section class="panel">
+          <div class="section-head">
+            <h4>Categories</h4>
+          </div>
+          <nav class="faq-nav">
+            <a href="#general" class="faq-nav-link active" data-category="general">
+              <i class="fa-solid fa-house"></i>
+              General
+            </a>
+            <a href="#account" class="faq-nav-link" data-category="account">
+              <i class="fa-solid fa-user"></i>
+              Account
+            </a>
+            <a href="#reading" class="faq-nav-link" data-category="reading">
+              <i class="fa-solid fa-book-open"></i>
+              Reading
+            </a>
+            <a href="#content" class="faq-nav-link" data-category="content">
+              <i class="fa-solid fa-images"></i>
+              Content
+            </a>
+            <a href="#technical" class="faq-nav-link" data-category="technical">
+              <i class="fa-solid fa-wrench"></i>
+              Technical
+            </a>
+          </nav>
+        </section>
+
+        <section class="panel">
+          <div class="section-head">
+            <h4>Still Need Help?</h4>
+          </div>
+          <p class="muted" style="margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.6;">
+            Can't find what you're looking for? Contact our support team.
+          </p>
+          <a href="#" class="btn" style="width: 100%; justify-content: center;">
+            <i class="fa-solid fa-envelope"></i>
+            Contact Support
+          </a>
+        </section>
+      </aside>
+
+      <main class="faq-main">
+        <!-- General Questions -->
+        <section class="panel faq-section" data-category="general">
+          <div class="section-head">
+            <h2>General Questions</h2>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can I change the reading layout?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes! We offer two reading layouts:</p>
+              <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Side Layout:</strong> Comments appear in a sidebar on the right while reading</li>
+                <li><strong>Bottom Layout:</strong> Comments appear below the chapter content</li>
+              </ul>
+              <p style="margin-top: 0.5rem;">You can switch between layouts using the toggle buttons in the reader controls. Your preference will be saved for future reading sessions.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Does my reading progress get saved?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>If you have an account and are logged in, your reading progress is automatically saved. When you return to a comic, you'll see a "Continue Reading" button that takes you to where you left off.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How do I follow a comic?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>On any comic's details page, click the "Follow" button. Followed comics will appear in your "My List" and you'll receive notifications when new chapters are released.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>What is Unicomick?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Unicomick is a comprehensive platform for reading manga, manhwa, manhua, and webtoons. We provide a vast collection of comics from various genres, publishers, and scanlation groups, all in one convenient location.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Is Unicomick free to use?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, Unicomick is completely free to use. You can browse, search, and read all available comics without any subscription or payment required. We support the platform through non-intrusive advertisements.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>What's the difference between manga, manhwa, and manhua?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>These terms refer to comics from different regions:</p>
+              <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Manga:</strong> Japanese comics, traditionally read from right to left</li>
+                <li><strong>Manhwa:</strong> Korean comics, typically read from left to right or in a vertical scroll format</li>
+                <li><strong>Manhua:</strong> Chinese comics, read from left to right</li>
+                <li><strong>Webtoon:</strong> Digital comics optimized for vertical scrolling, popular in Korea</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How often is new content added?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>New chapters and series are added daily. The frequency depends on scanlation groups and official releases. You can check the "Recently Added" section on the homepage or enable notifications for your followed comics to stay updated.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Content Questions -->
+        <section class="panel faq-section" data-category="content">
+          <div class="section-head">
+            <h2>Content & Updates</h2>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Why are some chapters missing?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Missing chapters can occur for several reasons:</p>
+              <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li>The scanlation group hasn't released them yet</li>
+                <li>Chapters were removed due to copyright claims</li>
+                <li>Technical issues during upload</li>
+                <li>The series is licensed and removed per publisher request</li>
+              </ul>
+              <p style="margin-top: 0.5rem;">Check the comic's details page for information about chapter availability.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can I request a comic to be added?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>While we don't accept direct requests, we constantly monitor popular series and work with scanlation groups to expand our library. If a series gains enough popularity or official translations become available, we'll add it to our platform.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>What does "Only English translations" filter do?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>This filter on the homepage shows only chapters that have been translated into English. When enabled, you won't see chapters in other languages. This helps you quickly find readable content in your preferred language.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How do I report inappropriate content?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>If you encounter inappropriate content, use the "Report" button on the comic's page or chapter. Provide detailed information about the issue, and our moderation team will review it within 24-48 hours.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Technical Questions -->
+        <section class="panel faq-section" data-category="technical">
+          <div class="section-head">
+            <h2>Technical Issues</h2>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Images are loading slowly or not at all. What can I do?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Try these troubleshooting steps:</p>
+              <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li>Refresh the page (F5 or Ctrl+R)</li>
+                <li>Clear your browser cache and cookies</li>
+                <li>Disable browser extensions (especially ad blockers)</li>
+                <li>Try a different browser or device</li>
+                <li>Check your internet connection</li>
+              </ul>
+              <p style="margin-top: 0.5rem;">If the problem persists, the image server might be experiencing high traffic. Try again in a few minutes.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Which browsers are supported?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Unicomick works best on modern browsers:</p>
+              <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li>Google Chrome (recommended)</li>
+                <li>Mozilla Firefox</li>
+                <li>Microsoft Edge</li>
+                <li>Safari (macOS and iOS)</li>
+                <li>Opera</li>
+              </ul>
+              <p style="margin-top: 0.5rem;">Make sure your browser is updated to the latest version for the best experience.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can I use Unicomick on mobile?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes! Unicomick is fully responsive and optimized for mobile devices. You can access it through your mobile browser (Chrome, Safari, Firefox, etc.) without needing to download an app.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Is there a mobile app?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Currently, we don't have a dedicated mobile app. However, our mobile web experience is optimized for smartphones and tablets. You can add Unicomick to your home screen for app-like access.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Why can't I leave comments?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>You need to be logged in to leave comments. If you're logged in and still can't comment, check if:</p>
+              <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li>Your account email is verified</li>
+                <li>Comments are enabled for that chapter</li>
+                <li>You've been temporarily restricted due to policy violations</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Account Questions -->
+        <section class="panel faq-section" data-category="account">
+          <div class="section-head">
+            <h2>Account & Profile</h2>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Do I need an account to read comics?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>No, you can browse and read comics without an account. However, creating a free account allows you to follow comics, save your reading progress, create lists, leave comments, and receive notifications for new chapters.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How do I create an account?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Click the profile icon in the top navigation bar and select "Sign Up". You can create an account using your email address or sign up with Google/Discord for faster registration.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>I forgot my password. What should I do?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>On the login page, click "Forgot Password?" and enter your email address. You'll receive a password reset link within a few minutes. If you don't see the email, check your spam folder.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can I change my username?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, you can change your username once every 30 days. Go to your profile settings and update your username in the account section.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Reading Questions -->
+        <section class="panel faq-section" data-category="reading">
+          <div class="section-head">
+            <h2>Reading Experience</h2>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How do I navigate while reading?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>You can navigate chapters in several ways:</p>
+              <ul style="margin-top: 0.5rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li>Use arrow keys (← →) to move between pages</li>
+                <li>Click on the left/right sides of the image</li>
+                <li>Use the navigation buttons at the top and bottom</li>
+                <li>Select a specific chapter from the dropdown menu</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2024 Unicomick. All rights reserved. | <a href="faq.html" style="color: var(--accent);">FAQ</a> | <a href="#" style="color: var(--accent);">Terms</a> | <a href="#" style="color: var(--accent);">Privacy</a></p>
+  </footer>
+
+  <style>
+    .faq-header {
+      padding: 3rem 2rem;
+    }
+
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .faq-sidebar {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .faq-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .faq-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .faq-nav-link:hover {
+      background: var(--bg-light);
+      color: var(--text);
+    }
+
+    .faq-nav-link.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    .faq-nav-link i {
+      font-size: 1rem;
+      width: 20px;
+    }
+
+    .faq-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .faq-section {
+      scroll-margin-top: 2rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      padding: 0;
+      gap: 1rem;
+    }
+
+    .faq-question:hover {
+      color: var(--accent);
+    }
+
+    .faq-question i {
+      font-size: 0.9rem;
+      transition: transform 0.3s;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+      color: var(--accent);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 1000px;
+      padding-top: 1rem;
+    }
+
+    .faq-answer p {
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-answer strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 1024px) {
+      .faq-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .faq-sidebar {
+        position: static;
+      }
+
+      .faq-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+      }
+
+      .faq-nav-link {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .faq-header {
+        padding: 2rem 1rem;
+      }
+
+      .faq-header h1 {
+        font-size: 1.75rem;
+      }
+
+      .faq-header p {
+        font-size: 0.95rem;
+      }
+
+      .faq-question {
+        font-size: 0.95rem;
+      }
+
+      .faq-answer {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('mobile-active');
+      this.setAttribute('aria-expanded', navLinks.classList.contains('mobile-active'));
+    });
+
+    // Category dropdown
+    document.getElementById('cat-toggle').addEventListener('click', function() {
+      const panel = document.getElementById('cat-panel');
+      const isHidden = panel.hasAttribute('hidden');
+      
+      if (isHidden) {
+        panel.removeAttribute('hidden');
+        this.setAttribute('aria-expanded', 'true');
+      } else {
+        panel.setAttribute('hidden', '');
+        this.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#cat-menu')) {
+        const panel = document.getElementById('cat-panel');
+        const toggle = document.getElementById('cat-toggle');
+        panel.setAttribute('hidden', '');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // FAQ accordion functionality
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', function() {
+        const item = this.closest('.faq-item');
+        const wasActive = item.classList.contains('active');
+        
+        // Close all items in the same section
+        const section = this.closest('.faq-section');
+        section.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        
+        // Toggle current item
+        if (!wasActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Category navigation
+    document.querySelectorAll('.faq-nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Update active state
+        document.querySelectorAll('.faq-nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Scroll to section
+        const category = this.dataset.category;
+        const section = document.querySelector(`[data-category="${category}"]`);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Update active category on scroll
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const category = entry.target.dataset.category;
+          document.querySelectorAll('.faq-nav-link').forEach(link => {
+            link.classList.toggle('active', link.dataset.category === category);
+          });
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.faq-section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Search functionality in FAQ
+    document.getElementById('global-search').addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      
+      if (searchTerm === '') {
+        // Show all items
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.style.display = 'block';
+        });
+        return;
+      }
+      
+      // Filter FAQ items
+      document.querySelectorAll('.faq-item').forEach(item => {
+        const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+        
+        if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+          item.style.display = 'block';
+          item.classList.add('active'); // Expand matching items
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+
+    // Keyboard shortcut for search (Ctrl+K)
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && 'k') {
+        e.preventDefault();
+        document.getElementById('global-search').focus();
+      }
+    });
+  </script>
+</body>
+</html>

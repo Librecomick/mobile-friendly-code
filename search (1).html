@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search - Unicomick</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand"><span>unicomick</span></a>
+      <div class="searchbar" role="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="global-search" type="text" placeholder="Search..." aria-label="Search" />
+        <kbd class="hint">Ctrl K</kbd>
+      </div>
+      <nav class="nav-links">
+        <div class="menu dropdown" id="cat-menu">
+          <button class="menu-btn" id="cat-toggle" aria-expanded="false">Categories <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="dropdown-menu" id="cat-panel" hidden>
+            <a href="#">Most Popular Webtoon Right Now</a>
+            <a href="#">Most Popular Manga Right Now</a>
+            <a href="#">Browse Comics by Genre</a>
+            <a href="#">Popular Publishers</a>
+            <a href="#">Popular Groups</a>
+          </div>
+        </div>
+        <a href="/search" class="link">Search</a>
+        <a href="#" class="link">My List</a>
+      </nav>
+      <div class="nav-right">
+        <button class="icon-pill mobile-menu-toggle" id="mobile-menu-btn" title="Menu" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <button class="icon-pill" title="Gender"><i class="fa-solid fa-venus-mars"></i></button>
+        <button class="icon-pill" title="Language"><i class="fa-solid fa-language"></i></button>
+        <a class="icon-pill" title="Profile" href="/profile" aria-label="Profile"><i class="fa-regular fa-user"></i></a>
+        <button class="icon-pill more-menu" title="More"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="panel">
+      <div class="section-head">
+        <h2>Advanced Search</h2>
+      </div>
+
+      <form id="search-form" class="search-filters">
+        <div class="filter-row">
+          <div class="filter-group full-width">
+            <label for="search-title">
+              <i class="fa-solid fa-book"></i>
+              Title
+            </label>
+            <input type="text" id="search-title" class="form-input" placeholder="Enter comic title..." />
+          </div>
+        </div>
+
+        <div class="filter-row">
+          <div class="filter-group">
+            <label for="search-type">
+              <i class="fa-solid fa-layer-group"></i>
+              Type
+            </label>
+            <select id="search-type" class="form-input">
+              <option value="">All Types</option>
+              <option value="manga">Manga</option>
+              <option value="manhwa">Manhwa</option>
+              <option value="manhua">Manhua</option>
+              <option value="webtoon">Webtoon</option>
+              <option value="comic">Comic</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="search-status">
+              <i class="fa-solid fa-circle-check"></i>
+              Status
+            </label>
+            <select id="search-status" class="form-input">
+              <option value="">All Status</option>
+              <option value="Ongoing">Ongoing</option>
+              <option value="Completed">Completed</option>
+              <option value="Hiatus">Hiatus</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-row">
+          <div class="filter-group full-width">
+            <label>
+              <i class="fa-solid fa-tags"></i>
+              Genres (Select multiple)
+            </label>
+            <div class="genre-grid" id="genre-checkboxes">
+              <!-- Genre checkboxes can be populated dynamically or left static -->
+              <label class="genre-checkbox"><input type="checkbox" value="Action" /><span>Action</span></label>
+              <label class="genre-checkbox"><input type="checkbox" value="Adventure" /><span>Adventure</span></label>
+              <label class="genre-checkbox"><input type="checkbox" value="Comedy" /><span>Comedy</span></label>
+              <label class="genre-checkbox"><input type="checkbox" value="Drama" /><span>Drama</span></label>
+              <label class="genre-checkbox"><input type="checkbox" value="Fantasy" /><span>Fantasy</span></label>
+              <label class="genre-checkbox"><input type="checkbox" value="Isekai" /><span>Isekai</span></label>
+              <label class="genre-checkbox"><input type="checkbox" value="Horror" /><span>Horror</span></label>
+              <label class="genre-checkbox"><input type="checkbox" value="Mystery" /><span>Mystery</span></label>
+              <label class="genre-checkbox"><input type="checkbox" value="Romance" /><span>Romance</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-row">
+          <div class="filter-group">
+            <label for="search-sort">
+              <i class="fa-solid fa-arrow-down-wide-short"></i>
+              Sort By
+            </label>
+            <select id="search-sort" class="form-input">
+              <option value="relevance">Relevance</option>
+              <option value="title-asc">Title (A-Z)</option>
+              <option value="title-desc">Title (Z-A)</option>
+              <option value="newest">Newest Added</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-actions">
+          <button type="submit" class="btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Search
+          </button>
+          <button type="button" class="btn ghost" id="reset-filters">
+            <i class="fa-solid fa-rotate-left"></i>
+            Reset Filters
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h3>Search Results</h3>
+        <span class="muted" id="results-count">0 results found</span>
+      </div>
+
+      <div class="grid" id="search-results">
+        <div class="status-message">Use the filters above to search for comics</div>
+      </div>
+
+      <nav class="pagination hidden" id="search-pagination">
+        <button class="btn ghost" data-page="prev">‹</button>
+        <button class="p-btn active" data-page="1">1</button>
+        <button class="btn ghost" data-page="next">›</button>
+      </nav>
+    </section>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2024 Unicomick. All rights reserved.</p>
+    <script type="module" src="/scripts/search.js"></script>
+  </footer>
+
+  <style>
+    /* NOTE: Assuming 'styles.css' contains the bulk of your styling. 
+       This is just for layout purposes on this page. and also in case something breaks so it doesnt well all white */
+    .search-filters { display: flex; flex-direction: column; gap: 1.5rem; }
+    .filter-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .filter-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .filter-group.full-width { grid-column: 1 / -1; }
+    .filter-group label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; font-weight: 500; }
+    .filter-group label i { font-size: 0.85rem; }
+    .genre-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.75rem; margin-top: 0.5rem; }
+    .genre-checkbox { border: 1px solid #333; padding: 0.75rem 1rem; border-radius: 6px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+    .genre-checkbox:hover { border-color: #4f46e5; }
+    .genre-checkbox input[type="checkbox"] { cursor: pointer; width: 16px; height: 16px; }
+    .genre-checkbox input[type="checkbox"]:checked + span { color: #4f46e5; font-weight: 600; }
+    .filter-actions { display: flex; gap: 1rem; padding-top: 1rem; border-top: 1px solid #333; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+    .grid-card { text-decoration: none; color: inherit; }
+    .grid-card img { width: 100%; aspect-ratio: 280 / 380; object-fit: cover; border-radius: 6px; }
+    .grid-card .title { font-weight: 600; margin-top: 0.5rem; }
+    .grid-card .muted { font-size: 0.85rem; color: #888; }
+    .status-message { text-align: center; padding: 2rem; color: #888; }
+    .hidden { display: none; }
+    @media (max-width: 768px) {
+      .filter-row { grid-template-columns: 1fr; }
+      .filter-actions { flex-direction: column; }
+    }
+  </style>
+  
+  <script type="module">
+    // Make sure supabase-client.js is in the same directory or provide the correct path
+    import { supabase, BUCKET_NAME } from './supabase-client.js';
+
+    // --- UI Interaction Logic (unchanged) ---
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks?.classList.toggle('mobile-active');
+      this.setAttribute('aria-expanded', navLinks?.classList.contains('mobile-active'));
+    });
+
+    // --- Search & Data Logic ---
+    const searchForm = document.getElementById('search-form');
+    const resultsContainer = document.getElementById('search-results');
+    const resultsCountEl = document.getElementById('results-count');
+    const paginationEl = document.getElementById('search-pagination');
+
+    if (!supabase) {
+      console.error('Supabase client is not initialized. Check your supabase-client.js file.');
+      resultsContainer.innerHTML = `<div class="status-message" style="color: red;">Error: Supabase client not configured.</div>`;
+    } else {
+      searchForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        performSearch();
+      });
+    }
+
+    document.getElementById('reset-filters')?.addEventListener('click', () => {
+      searchForm?.reset();
+      resultsContainer.innerHTML = '<div class="status-message">Use the filters above to search for comics</div>';
+      resultsCountEl.textContent = '0 results found';
+      paginationEl?.classList.add('hidden');
+    });
+
+    /**
+     * Performs a search against the 'manga_details' table in Supabase
+     */
+    async function performSearch() {
+      if (!resultsContainer) return;
+      resultsContainer.innerHTML = '<div class="status-message">Searching...</div>';
+      
+      const title = document.getElementById('search-title')?.value.trim() || '';
+      const status = document.getElementById('search-status')?.value || '';
+      const sort = document.getElementById('search-sort')?.value || 'relevance';
+      const selectedGenres = Array.from(document.querySelectorAll('#genre-checkboxes input:checked')).map(cb => cb.value);
+
+      try {
+        // --- FIX 1: Use the correct table name 'manga_details' ---
+        let query = supabase.from('manga_details').select('*');
+
+        // --- FIX 2: Search against the 'folder_name' column for the title ---
+        if (title) {
+          query = query.ilike('folder_name', `%${title.replace(/ /g, '-').toLowerCase()}%`);
+        }
+        
+        if (status) {
+          query = query.eq('status', status);
+        }
+
+        // --- FIX 3: Filter genres using 'ilike' for each selected genre ---
+        // This works for text fields containing comma-separated genres.
+        if (selectedGenres.length > 0) {
+            selectedGenres.forEach(genre => {
+                query = query.ilike('genre', `%${genre}%`);
+            });
+        }
+        
+        // --- FIX 4: Sort by 'folder_name' instead of 'title' ---
+        switch(sort) {
+          case 'title-asc': 
+            query = query.order('folder_name', { ascending: true }); 
+            break;
+          case 'title-desc': 
+            query = query.order('folder_name', { ascending: false }); 
+            break;
+          case 'newest': 
+            query = query.order('created_at', { ascending: false }); 
+            break;
+          default: 
+            // Default order by folder_name
+            query = query.order('folder_name', { ascending: true });
+        }
+
+        const { data: results, error } = await query;
+
+        if (error) throw error;
+
+        displayResults(results || []);
+
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+        resultsContainer.innerHTML = `<div class="status-message" style="color: red;">Error: ${error.message}</div>`;
+      }
+    }
+
+    /**
+     * Renders the search results to the DOM
+     */
+    function displayResults(results) {
+      resultsCountEl.textContent = `${results.length} result${results.length !== 1 ? 's' : ''} found`;
+
+      if (!resultsContainer) return;
+
+      if (results.length === 0) {
+        resultsContainer.innerHTML = '<div class="status-message">No manga found matching your criteria</div>';
+        paginationEl?.classList.add('hidden');
+        return;
+      }
+
+      resultsContainer.innerHTML = results.map(manga => {
+        // --- FIX 5 (Updated): Construct the image URL from Supabase Storage for .webp ---
+        // This assumes your covers are at: /manwha/{folder_name}/cover.webp
+        const imageUrl = supabase.storage
+          .from(BUCKET_NAME)
+          .getPublicUrl(`${manga.folder_name}/cover.webp`).data.publicUrl;
+
+        // Create a display-friendly title from the folder_name
+        const displayTitle = manga.folder_name
+          .replace(/-/g, ' ')
+          .replace(/\b\w/g, char => char.toUpperCase());
+
+        return `
+          <a href="/details?series=${manga.folder_name}" class="grid-card">
+            <img 
+              src="${imageUrl}" 
+              alt="Cover for ${displayTitle}" 
+              onerror="this.onerror=null;this.src='https://placehold.co/280x380/1a202c/e2e8f0?text=No+Cover';"
+            />
+            <div class="meta">
+              <div class="title">${displayTitle}</div>
+              <div class="line muted">${manga.status || 'Unknown'}</div>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+      if (results.length > 0) {
+        paginationEl?.classList.remove('hidden');
+      } else {
+        paginationEl?.classList.add('hidden');
+      }
+    }
+
+    // --- Global Search & Shortcuts (unchanged) ---
+    document.getElementById('global-search')?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const searchValue = e.target.value;
+        if (searchValue.trim()) {
+          document.getElementById('search-title').value = searchValue;
+          performSearch();
+        }
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        document.getElementById('global-search')?.focus();
+      }
+    });
+  </script>
+</body>
+</html>
+
+

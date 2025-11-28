@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Unicomick</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/styles.css">
+  <style>
+    .admin-page { max-width: 1400px; margin: 0 auto; padding: 2rem 1rem; }
+    .admin-header { display: flex; justify-content: space-between; align-items: center; padding: 2rem; margin-bottom: 2rem; }
+    .admin-title { display: flex; align-items: center; gap: 1.5rem; }
+    .admin-title h1 { margin: 0; font-size: 2rem; }
+    .admin-title p { margin: 0.5rem 0 0 0; }
+    .admin-container { display: grid; grid-template-columns: 1fr 350px; gap: 2rem; }
+    .admin-form-panel { background: var(--bg-light); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; }
+    .admin-form-panel h2 { margin-top: 0; display: flex; align-items: center; gap: 0.5rem; }
+    .form { display: flex; flex-direction: column; gap: 1.5rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; color: var(--text); }
+    .form-group label i { color: var(--accent); font-size: 0.9rem; }
+    .form-input { padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-dark); color: var(--text); font-size: 1rem; font-family: inherit; transition: all 0.2s; }
+    .form-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1); }
+    textarea.form-input { resize: vertical; min-height: 100px; }
+    .form-hint { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
+    .btn-primary { background: var(--accent); color: white; padding: 1rem 2rem; font-size: 1rem; font-weight: 600; }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .message { margin-top: 1.5rem; padding: 1rem; border-radius: 6px; display: none; animation: slideIn 0.3s; }
+    .message.success { background: #10b981; color: white; display: block; }
+    .message.error { background: #ef4444; color: white; display: block; }
+    .message.loading { background: var(--accent); color: white; display: block; }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    .admin-guide { background: var(--bg-light); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; height: fit-content; position: sticky; top: 2rem; }
+    .admin-guide h3 { margin-top: 0; display: flex; align-items: center; gap: 0.5rem; }
+    .guide-list { list-style: none; padding: 0; margin: 1.5rem 0 0 0; display: flex; flex-direction: column; gap: 1.5rem; }
+    .guide-list li { display: flex; gap: 1rem; }
+    .guide-list li > i { color: var(--accent); font-size: 1.5rem; flex-shrink: 0; margin-top: 0.25rem; }
+    .guide-list li strong { display: block; margin-bottom: 0.25rem; color: var(--text); }
+    .guide-list li p { margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+    .genre-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+    .genre-tag { background: var(--bg-dark); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: all 0.2s; }
+    .genre-tag:hover { background: var(--accent); color: white; border-color: var(--accent); }
+    .genre-tag.selected { background: var(--accent); color: white; border-color: var(--accent); }
+    @media (max-width: 1024px) {
+      .admin-container { grid-template-columns: 1fr; }
+      .admin-guide { position: relative; top: 0; }
+      .admin-header { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand"><span>unicomick</span></a>
+      <div class="searchbar" role="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="global-search" type="text" placeholder="Search..." aria-label="Search" />
+        <kbd class="hint">Ctrl K</kbd>
+      </div>
+      <nav class="nav-links">
+        <div class="menu dropdown" id="cat-menu">
+          <button class="menu-btn" id="cat-toggle" aria-expanded="false">Categories <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="dropdown-menu" id="cat-panel" hidden>
+            <a href="#">Most Popular Webtoon Right Now</a>
+            <a href="#">Most Popular Manga Right Now</a>
+            <a href="#">Browse Comics by Genre</a>
+            <a href="#">Popular Publishers</a>
+            <a href="#">Popular Groups</a>
+          </div>
+        </div>
+        <a href="/search" class="link">Search</a>
+        <a href="#" class="link">My List</a>
+      </nav>
+      <div class="nav-right">
+        <button class="icon-pill" title="Gender"><i class="fa-solid fa-venus-mars"></i></button>
+        <button class="icon-pill" title="Language"><i class="fa-solid fa-language"></i></button>
+        <a class="icon-pill" title="Profile" href="/profile" aria-label="Profile"><i class="fa-regular fa-user"></i></a>
+        <button class="icon-pill" title="More"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="admin-page">
+      <div class="admin-header panel">
+        <div class="admin-title">
+          <i class="fa-solid fa-shield-halved" style="color: var(--accent); font-size: 2.5rem;"></i>
+          <div>
+            <h1>Admin Panel</h1>
+            <p class="muted">Add and manage manga details for your collection</p>
+          </div>
+        </div>
+        <a href="/profile" class="btn ghost"><i class="fa-solid fa-arrow-left"></i> Back to Profile</a>
+      </div>
+
+      <div class="admin-container">
+        <!-- Main Form -->
+        <div class="admin-form-panel">
+          <h2><i class="fa-solid fa-plus-circle"></i> Add New Manga</h2>
+          <form id="admin-form" class="form">
+            <div class="form-group">
+              <label for="folder-name">
+                <i class="fa-solid fa-folder"></i>
+                Folder Name
+              </label>
+              <input 
+                type="text" 
+                id="folder-name" 
+                class="form-input"
+                placeholder="e.g., solo-leveling" 
+                required
+              />
+              <small class="form-hint">Must exactly match the folder name in your Supabase storage (case-sensitive)</small>
+            </div>
+
+            <div class="form-group">
+              <label for="title">
+                <i class="fa-solid fa-heading"></i>
+                Display Title
+              </label>
+              <input 
+                type="text" 
+                id="title" 
+                class="form-input"
+                placeholder="e.g., Solo Leveling" 
+                required
+              />
+              <small class="form-hint">The title that will be displayed to users</small>
+            </div>
+
+            <div class="form-group">
+              <label for="author">
+                <i class="fa-solid fa-pen"></i>
+                Author
+              </label>
+              <input 
+                type="text" 
+                id="author" 
+                class="form-input"
+                placeholder="e.g., Chugong" 
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="type">
+                <i class="fa-solid fa-layer-group"></i>
+                Type
+              </label>
+              <select id="type" class="form-input" required>
+                <option value="manga">Manga</option>
+                <option value="manhwa" selected>Manhwa</option>
+                <option value="manhua">Manhua</option>
+                <option value="webtoon">Webtoon</option>
+                <option value="comic">Comic</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="status">
+                <i class="fa-solid fa-circle-info"></i>
+                Publication Status
+              </label>
+              <select id="status" class="form-input" required>
+                <option value="ongoing">Ongoing</option>
+                <option value="completed">Completed</option>
+                <option value="hiatus">Hiatus</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="year">
+                <i class="fa-solid fa-calendar"></i>
+                Release Year
+              </label>
+              <input 
+                type="number" 
+                id="year" 
+                class="form-input"
+                placeholder="e.g., 2024"
+                min="1900"
+                max="2099"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>
+                <i class="fa-solid fa-tags"></i>
+                Genres (Click to select)
+              </label>
+              <div class="genre-tags" id="genre-selector">
+                <span class="genre-tag" data-genre="action">Action</span>
+                <span class="genre-tag" data-genre="adventure">Adventure</span>
+                <span class="genre-tag" data-genre="comedy">Comedy</span>
+                <span class="genre-tag" data-genre="drama">Drama</span>
+                <span class="genre-tag" data-genre="fantasy">Fantasy</span>
+                <span class="genre-tag" data-genre="horror">Horror</span>
+                <span class="genre-tag" data-genre="mystery">Mystery</span>
+                <span class="genre-tag" data-genre="romance">Romance</span>
+                <span class="genre-tag" data-genre="scifi">Sci-Fi</span>
+                <span class="genre-tag" data-genre="slice-of-life">Slice of Life</span>
+                <span class="genre-tag" data-genre="sports">Sports</span>
+                <span class="genre-tag" data-genre="supernatural">Supernatural</span>
+                <span class="genre-tag" data-genre="thriller">Thriller</span>
+                <span class="genre-tag" data-genre="historical">Historical</span>
+                <span class="genre-tag" data-genre="psychological">Psychological</span>
+                <span class="genre-tag" data-genre="mature">Mature</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="description">
+                <i class="fa-solid fa-align-left"></i>
+                Description
+              </label>
+              <textarea 
+                id="description" 
+                class="form-input"
+                placeholder="Enter a detailed description of the manga..." 
+                rows="6"
+                required
+              ></textarea>
+              <small class="form-hint">Write a compelling description to engage readers</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submit-btn">
+              <i class="fa-solid fa-save"></i>
+              Add Manga to Database
+            </button>
+          </form>
+
+          <div class="message" id="message"></div>
+        </div>
+
+        <!-- Sidebar Guide -->
+        <div class="admin-guide panel">
+          <h3><i class="fa-solid fa-lightbulb"></i> Quick Guide</h3>
+          <ul class="guide-list">
+            <li>
+              <i class="fa-solid fa-folder-tree"></i>
+              <div>
+                <strong>Storage Structure</strong>
+                <p>Your manga folder should contain a /cover subfolder with at least one cover image, plus chapter folders like chapter-1, chapter-2, etc.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fa-solid fa-image"></i>
+              <div>
+                <strong>Cover Image</strong>
+                <p>Place your cover image in the /cover folder. Supported formats: JPG, PNG, WEBP. Recommended size: 300x400px or higher.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fa-solid fa-book"></i>
+              <div>
+                <strong>Chapter Naming</strong>
+                <p>Name chapter folders consistently: chapter-1, chapter-2, or Chapter-1, Chapter-2. The system will auto-detect and sort them.</p>
+              </div>
+            </li>
+            <li>
+              <i class="fa-solid fa-check-circle"></i>
+              <div>
+                <strong>Before Submitting</strong>
+                <p>Double-check that the folder name matches exactly (including hyphens and capitalization) with your Supabase storage folder.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Unicomick. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <script type="module">
+    import { supabase } from './supabase-client.js';
+
+    // UI Interactions
+    document.getElementById('cat-toggle')?.addEventListener('click', function() {
+      const panel = document.getElementById('cat-panel');
+      if (panel) {
+        panel.hidden = !panel.hidden;
+        this.setAttribute('aria-expanded', !panel.hidden);
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#cat-menu')) {
+        const panel = document.getElementById('cat-panel');
+        const toggle = document.getElementById('cat-toggle');
+        if (panel) panel.hidden = true;
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Genre Selection
+    const genreSelector = document.getElementById('genre-selector');
+    const selectedGenres = new Set();
+
+    genreSelector?.addEventListener('click', function(e) {
+      const tag = e.target.closest('.genre-tag');
+      if (!tag) return;
+
+      const genre = tag.dataset.genre;
+      if (selectedGenres.has(genre)) {
+        selectedGenres.delete(genre);
+        tag.classList.remove('selected');
+      } else {
+        selectedGenres.add(genre);
+        tag.classList.add('selected');
+      }
+    });
+
+    // Form Submission
+    const form = document.getElementById('admin-form');
+    const messageDiv = document.getElementById('message');
+    const submitBtn = document.getElementById('submit-btn');
+
+    function showMessage(text, type) {
+      if (!messageDiv) return;
+      messageDiv.textContent = text;
+      messageDiv.className = `message ${type}`;
+      messageDiv.style.display = 'block';
+      
+      if (type !== 'loading') {
+        setTimeout(() => {
+          messageDiv.style.display = 'none';
+        }, 5000);
+      }
+    }
+
+    async function findCoverImage(folderName) {
+      try {
+        // Try to find cover image in the /cover subfolder
+        const { data: coverFiles, error: coverError } = await supabase.storage
+          .from('manhwa') // CHANGE THIS to your bucket name
+          .list(`${folderName}/cover`, {
+            limit: 1,
+            sortBy: { column: 'name', order: 'asc' }
+          });
+
+        if (!coverError && coverFiles && coverFiles.length > 0) {
+          const coverPath = `${folderName}/cover/${coverFiles[0].name}`;
+          const { data: { publicUrl } } = supabase.storage
+            .from('manhwa') // CHANGE THIS to your bucket name
+            .getPublicUrl(coverPath);
+          return { coverPath, imageUrl: publicUrl };
+        }
+
+        // Fallback: try to find any image in the main folder
+        const { data: mainFiles, error: mainError } = await supabase.storage
+          .from('manhwa') // CHANGE THIS to your bucket name
+          .list(folderName, {
+            limit: 10,
+            sortBy: { column: 'name', order: 'asc' }
+          });
+
+        if (!mainError && mainFiles && mainFiles.length > 0) {
+          const imageFile = mainFiles.find(f => 
+            f.name.match(/\.(jpg|jpeg|png|webp|gif)$/i)
+          );
+          
+          if (imageFile) {
+            const coverPath = `${folderName}/${imageFile.name}`;
+            const { data: { publicUrl } } = supabase.storage
+              .from('manhwa') // CHANGE THIS to your bucket name
+              .getPublicUrl(coverPath);
+            return { coverPath, imageUrl: publicUrl };
+          }
+        }
+
+        return { coverPath: null, imageUrl: null };
+      } catch (error) {
+        console.error('Error finding cover:', error);
+        return { coverPath: null, imageUrl: null };
+      }
+    }
+
+    async function countChapters(folderName) {
+      try {
+        const { data: folders, error } = await supabase.storage
+          .from('manhwa') // CHANGE THIS to your bucket name
+          .list(folderName, {
+            limit: 1000,
+            sortBy: { column: 'name', order: 'asc' }
+          });
+
+        if (error) {
+          console.error('Error counting chapters:', error);
+          return 0;
+        }
+
+        // Count folders that look like chapters
+        const chapterPattern = /^(chapter|ch)[-_\s]?\d+/i;
+        const chapters = folders.filter(item => 
+          chapterPattern.test(item.name)
+        );
+        
+        return chapters.length;
+      } catch (error) {
+        console.error('Error counting chapters:', error);
+        return 0;
+      }
+    }
+
+    form?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      if (!supabase) {
+        showMessage('Supabase client not initialized!', 'error');
+        return;
+      }
+
+      // Get form values
+      const folderName = document.getElementById('folder-name')?.value.trim();
+      const title = document.getElementById('title')?.value.trim();
+      const author = document.getElementById('author')?.value.trim();
+      const type = document.getElementById('type')?.value;
+      const status = document.getElementById('status')?.value;
+      const year = document.getElementById('year')?.value;
+      const description = document.getElementById('description')?.value.trim();
+
+      if (!folderName || !title || !author || !description) {
+        showMessage('Please fill in all required fields!', 'error');
+        return;
+      }
+
+      // Disable submit button
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+      }
+
+      showMessage('Verifying folder and gathering information...', 'loading');
+
+      try {
+        // Check if folder exists in storage
+        const { data: folderCheck, error: folderError } = await supabase.storage
+          .from('manhwa') // CHANGE THIS to your bucket name
+          .list(folderName, {
+            limit: 1
+          });
+
+        if (folderError || !folderCheck || folderCheck.length === 0) {
+          throw new Error(`Folder "${folderName}" not found in storage. Please check the folder name.`);
+        }
+
+        // Find cover image
+        showMessage('Finding cover image...', 'loading');
+        const { coverPath, imageUrl } = await findCoverImage(folderName);
+
+        // Count chapters
+        showMessage('Counting chapters...', 'loading');
+        const totalChapters = await countChapters(folderName);
+
+        // Prepare data for database
+        const manhwaData = {
+          folder_name: folderName,
+          title: title,
+          author: author,
+          type: type,
+          status: status,
+          genres: Array.from(selectedGenres),
+          description: description,
+          cover_path: coverPath,
+          image_url: imageUrl,
+          total_chapters: totalChapters,
+          year: year ? parseInt(year) : null,
+          rating: 0.00
+        };
+
+        showMessage('Saving to database...', 'loading');
+
+        // Insert into database
+        const { data, error } = await supabase
+          .from('manhwa')
+          .insert([manhwaData])
+          .select();
+
+        if (error) {
+          if (error.code === '23505') {
+            throw new Error('This manga already exists in the database!');
+          }
+          throw error;
+        }
+
+        showMessage(
+          `✓ Success! "${title}" has been added with ${totalChapters} chapters.`, 
+          'success'
+        );
+
+        // Reset form
+        form.reset();
+        selectedGenres.clear();
+        document.querySelectorAll('.genre-tag').forEach(tag => {
+          tag.classList.remove('selected');
+        });
+
+      } catch (error) {
+        console.error('Error adding manga:', error);
+        showMessage(`Error: ${error.message}`, 'error');
+      } finally {
+        // Re-enable submit button
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fa-solid fa-save"></i> Add Manga to Database';
+        }
+      }
+    });
+
+    // Keyboard shortcut
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        document.getElementById('global-search')?.focus();
+      }
+    });
+  </script>
+</body>
+</html>

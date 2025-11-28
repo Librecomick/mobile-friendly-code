@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - Unicomick</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand"><span>unicomick</span></a>
+      <div class="searchbar" role="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="global-search" type="text" placeholder="Search..." aria-label="Search" />
+        <kbd class="hint">Ctrl K</kbd>
+      </div>
+      <nav class="nav-links">
+        <div class="menu dropdown" id="cat-menu">
+          <button class="menu-btn" id="cat-toggle" aria-expanded="false">Categories <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="dropdown-menu" id="cat-panel" hidden>
+            <a href="#">Most Popular Webtoon Right Now</a>
+            <a href="#">Most Popular Manga Right Now</a>
+            <a href="#">Browse Comics by Genre</a>
+            <a href="#">Popular Publishers</a>
+            <a href="#">Popular Groups</a>
+          </div>
+        </div>
+        <a href="/search" class="link">Search</a>
+        <a href="#" class="link">My List</a>
+      </nav>
+      <div class="nav-right">
+        <button class="icon-pill mobile-menu-toggle" id="mobile-menu-btn" title="Menu" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <button class="icon-pill" title="Gender"><i class="fa-solid fa-venus-mars"></i></button>
+        <button class="icon-pill" title="Language"><i class="fa-solid fa-language"></i></button>
+        <a class="icon-pill" title="Profile" href="/profile" aria-label="Profile"><i class="fa-regular fa-user"></i></a>
+        <button class="icon-pill more-menu" title="More"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="notice hidden" id="notice">
+      <div class="icon"><i class="fa-solid fa-circle-info"></i></div>
+      <div class="msg">
+        <strong>Notice:</strong> Configure your Supabase credentials in supabase-client.js to load your content.
+      </div>
+      <button class="icon-btn" id="dismiss-notice" aria-label="Dismiss">×</button>
+    </section>
+
+    <section class="toggle-row">
+      <label class="switch">
+        <input type="checkbox" id="translate-switch" />
+        <span class="slider"></span>
+      </label>
+      <span class="switch-label">Display only chapters translated into English.</span>
+    </section>
+
+    <main class="layout">
+      <div class="main">
+        <section class="followed panel scroller">
+          <div class="section-head">
+            <h2>New Chapters from Followed Comics</h2>
+          </div>
+          <div class="h-scroll cards" id="followed-cards">
+            <div class="status-message">Loading content...</div>
+          </div>
+          <button class="scroller-arrow right hidden" data-target="followed-cards" aria-label="Next">›</button>
+        </section>
+
+        <section class="panel scroller">
+          <div class="section-head">
+            <h3>Most Recent Trending</h3>
+          </div>
+          <div class="h-scroll cards" id="trending-cards">
+            <div class="status-message">Loading trending content...</div>
+          </div>
+          <button class="scroller-arrow right hidden" data-target="trending-cards" aria-label="Next">›</button>
+        </section>
+
+        <section class="panel scroller">
+          <div class="section-head">
+            <h3>Most Followed New Comics</h3>
+          </div>
+          <div class="h-scroll cards" id="most-followed-cards">
+            <div class="status-message">Loading followed comics...</div>
+          </div>
+          <button class="scroller-arrow right hidden" data-target="most-followed-cards" aria-label="Next">›</button>
+        </section>
+
+        <section class="panel" id="updates-section">
+          <div class="section-head with-badges">
+            <h3>All Comics</h3>
+            <div class="badges tabs" id="updates-tabs">
+              <button class="badge tab-btn active" data-tab="all" type="button">All</button>
+            </div>
+          </div>
+          <div class="grid updates" id="updates-all">
+            <div class="status-message">Loading collection...</div>
+          </div>
+          <nav class="pagination hidden" data-for="updates-all">
+            <button class="btn ghost" data-page="prev">‹</button>
+            <button class="p-btn active" data-page="1">1</button>
+            <button class="btn ghost" data-page="next">›</button>
+          </nav>
+        </section>
+      </div>
+
+      <aside class="side">
+        <section class="panel">
+          <div class="section-head"><h4>Most Recent Trending</h4></div>
+          <ul class="side-list" id="trending-sidebar-list">
+            <li class="status-message">Loading...</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <div class="section-head">
+            <h4>Recently Added <span class="muted" style="font-weight: 400;">/ Complete Series</span></h4>
+            <button class="icon-btn" title="More options"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+          </div>
+          <ul class="side-list" id="recent-list">
+            <!-- Your JS will populate this list. Here are examples based on the reference image. -->
+            <li>
+              <a href="#">
+                <img src="https://placehold.co/80x112/1a202c/e2e8f0?text=Comic" alt="Cover for Held Fast">
+                <div class="item-meta">
+                  <div class="item-title" title="Held Fast">Held Fast</div>
+                  <div class="item-details">
+                    <span>an hour ago</span>
+                    <span>&bull;</span>
+                    <span>1 chapters</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="https://placehold.co/80x112/1a202c/e2e8f0?text=Comic" alt="Cover for Gallantry Will Get You Nowhere">
+                <div class="item-meta">
+                  <div class="item-title" title="Gallantry Will Get You Nowhere">Gallantry Will Get You Nowhere</div>
+                  <div class="item-details">
+                    <span>12 hours ago</span>
+                    <span>&bull;</span>
+                    <span>2 chapters</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="https://placehold.co/80x112/1a202c/e2e8f0?text=Comic" alt="Cover for Bari, the Thunder That Awakened...">
+                <div class="item-meta">
+                  <div class="item-title" title="Bari, the Thunder That Awakened...">Bari, the Thunder That Awakened...</div>
+                  <div class="item-details">
+                    <span>21 hours ago</span>
+                    <span>&bull;</span>
+                    <span>8 chapters</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="https://placehold.co/80x112/1a202c/e2e8f0?text=Comic" alt="Cover for Evil Spirits and Demons">
+                <div class="item-meta">
+                  <div class="item-title" title="Evil Spirits and Demons">Evil Spirits and Demons</div>
+                  <div class="item-details">
+                    <span>a day ago</span>
+                    <span>&bull;</span>
+                    <span>14 chapters</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+             <li>
+              <a href="#">
+                <img src="https://placehold.co/80x112/1a202c/e2e8f0?text=Comic" alt="Cover for Guilty Office">
+                <div class="item-meta">
+                  <div class="item-title" title="Guilty Office">Guilty Office</div>
+                  <div class="item-details">
+                    <span>a day ago</span>
+                    <span>&bull;</span>
+                    <span>18 chapters</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="status-message hidden">Loading...</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <div class="section-head"><h4>Popular Series</h4></div>
+          <ol class="rank-list" id="popular-list">
+            <li class="status-message">Loading...</li>
+          </ol>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2024 Unicomick. All rights reserved. | <a href="faq.html" style="color: var(--accent); text-decoration: none;">FAQ</a> | <a href="#" style="color: var(--accent); text-decoration: none;">Terms</a> | <a href="#" style="color: var(--accent); text-decoration: none;">Privacy</a></p>
+  </footer>
+
+  <script type="module" src="/scripts/main.js"></script>
+  <script type="module" src="/scripts/supabase-client.js"></script>
+</body>
+</html>

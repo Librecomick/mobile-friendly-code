@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>unicomick</title>
+  <link rel="stylesheet" href="/style/styles.css">
+</head>
+<body>
+  <header class="navbar">
+     <!-- Your Navbar Here -->
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <h2>Browse Manga</h2>
+      <!-- Filter controls here -->
+    </section>
+
+    <section class="panel">
+      <h2>Manga Collection</h2>
+      <div class="manga-grid" id="manga-grid">
+        <!-- Manga cards will be populated here -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Unicomick. All rights reserved.</p>
+  </footer>
+
+  <script type="module">
+    import { supabase } from './supabase-client.js';
+    // Your manga browsing and filtering logic here...
+  </script>
+</body>
+</html>

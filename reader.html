@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Reader • unicomick</title>
+  <meta name="theme-color" content="#2596be" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="reader-page">
+   <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand"><span>unicomick</span></a>
+      <div class="searchbar" role="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="global-search" type="text" placeholder="Search..." aria-label="Search" />
+        <kbd class="hint">Ctrl K</kbd>
+      </div>
+      <nav class="nav-links">
+        <div class="menu dropdown" id="cat-menu">
+          <button class="menu-btn" id="cat-toggle" aria-expanded="false">Categories <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="dropdown-menu" id="cat-panel" hidden>
+            <a href="#">Most Popular Webtoon Right Now</a>
+            <a href="#">Most Popular Manga Right Now</a>
+            <a href="#">Browse Comics by Genre</a>
+            <a href="#">Popular Publishers</a>
+            <a href="#">Popular Groups</a>
+          </div>
+        </div>
+        <a href="/search" class="link">Search</a>
+        <a href="#" class="link">My List</a>
+      </nav>
+      <div class="nav-right">
+        <button class="icon-pill mobile-menu-toggle" id="mobile-menu-btn" title="Menu" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <button class="icon-pill" title="Gender"><i class="fa-solid fa-venus-mars"></i></button>
+        <button class="icon-pill" title="Language"><i class="fa-solid fa-language"></i></button>
+        <a class="icon-pill" title="Profile" href="/profile" aria-label="Profile"><i class="fa-regular fa-user"></i></a>
+        <button class="icon-pill more-menu" title="More"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div id="reader" class="reader-layout">
+    <div class="reader-main">
+      
+
+      <div id="image-container"></div>
+      <div id="end-sentinel" aria-hidden="true"></div>
+
+      <div id="bottom-controls" class="bottom-nav" role="navigation" aria-label="Chapter navigation">
+        <div class="nav-section">
+          <div class="nav-inner">
+            <button id="prev-bottom" class="nav-btn" title="Previous chapter">
+              <i class="fas fa-arrow-left"></i>
+              <span class="chapter-label">Ch. 44</span>
+            </button>
+            <div class="chapter-info">
+              <div class="chapter-title">Previous Chapter</div>
+              <div class="chapter-pages">24 Pages</div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-section">
+          <div class="nav-inner">
+            <button id="next-bottom" class="nav-btn" title="Next chapter">
+              <i class="fas fa-arrow-right"></i>
+              <span class="chapter-label">Ch. 46</span>
+            </button>
+            <div class="chapter-info">
+              <div class="chapter-title">Next Chapter</div>
+              <div class="chapter-pages">Coming Soon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="reader-sidebar">
+      <div class="series-card">
+        <div class="series-head">
+          <img class="series-cover" src="https://i.imgur.com/placeholder-cover.jpg" alt="Series Cover" />
+          <div class="series-title-container">
+            <h2 class="series-title">Solo Leveling</h2>
+            <div class="series-meta">
+              <span class="series-author">Chugong</span>
+              <span class="series-status">Completed</span>
+            </div>
+          </div>
+        </div>
+        <div class="controls-box">
+          <div class="series-controls">
+            <div class="row">
+              <div class="chapter-nav">
+                <button id="ch-prev" class="icon-btn" title="Previous chapter"><i class="fa-solid fa-arrow-up"></i></button>
+                <select id="ch-select" class="select">
+                  <option selected>Ch 45</option>
+                  <option>Ch 44</option>
+                  <option>Ch 43</option>
+                </select>
+                <button id="ch-next" class="icon-btn" title="Next chapter"><i class="fa-solid fa-arrow-down"></i></button>
+              </div>
+              <select id="lang-select" class="select">
+                <option selected>English</option>
+                <option>Spanish</option>
+                <option>Hindi</option>
+              </select>
+            </div>
+            <div class="row">
+              <select id="scanlator-select" class="select">
+                <option selected>Asura</option>
+                <option>Rizzcomic</option>
+                <option>Void Scans</option>
+              </select>
+              <div class="updated tiny muted">Updated: 3 months ago</div>
+            </div>
+          </div>
+        </div>
+        <div class="likes-row big">
+          <i class="fa-regular fa-thumbs-up"></i>
+          <span id="likes-count">347</span>
+        </div>
+      </div>
+      <div class="reader-controls side-controls" style="position:sticky; top:0; z-index:5;">
+        <button id="toggle-sidebar" class="btn small"><i class="fa-solid fa-columns"></i> Toggle Sidebar</button>
+        <div class="btn-row">
+          <button id="fit-width" class="btn small"><i class="fa-solid fa-arrows-left-right-to-line"></i> Fit Width</button>
+          <button id="fit-height" class="btn small"><i class="fa-solid fa-arrows-up-to-line"></i> Fit Height</button>
+        </div>
+        <select id="page-direction">
+          <option value="vertical" selected>Vertical Scroll</option>
+          <option value="horizontal">Horizontal</option>
+        </select>
+        <div class="layout-toggle">
+          <button id="prev-ch" class="btn small"><i class="fa-solid fa-angle-left"></i> Prev</button>
+          <button id="next-ch" class="btn small">Next <i class="fa-solid fa-angle-right"></i></button>
+        </div>
+      </div>
+
+      <div class="comments-section">
+        <div class="comments-header">
+          <h3><i class="fa-regular fa-comments"></i> Comments</h3>
+        </div>
+        <div class="comments-wrap">
+          <div class="comments-content visible blurred" id="comments-box">
+            <div class="comment-form">
+              <textarea placeholder="Leave a comment..."></textarea>
+              <div class="comment-form-actions">
+                <button class="btn ghost">Cancel</button>
+                <button class="btn">Post</button>
+              </div>
+            </div>
+            <div class="comments-list" id="comments-list">
+              <div class="comment-item">
+                <div class="comment-header">
+                  <div class="comment-author"><i class="fa-regular fa-user"></i> user123</div>
+                  <div class="comment-date">3m ago</div>
+                </div>
+                <div class="comment-text">Loving this chapter. The reader layout feels great and the pacing is on point.</div>
+              </div>
+            </div>
+          </div>
+          <div class="comments-overlay" id="comments-overlay"><i class="fa-solid fa-eye"></i> Click to see comments and spoilers</div>
+        </div>
+        
+      </div>
+    </aside>
+  </div>
+
+  <div class="nav-fabs">
+    <button id="prev-fab" class="nav-fab small hidden" title="Previous"><i class="fa-solid fa-angle-left"></i></button>
+    <button id="next-fab" class="nav-fab small hidden" title="Next"><i class="fa-solid fa-angle-right"></i></button>
+  </div>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <ul class="footer-links"></ul>
+    </div>
+  </footer>
+
+  <script src="reader.js"></script>
+</body>
+</html>

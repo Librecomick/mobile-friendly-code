@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manga Details - Unicomick</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand"><span>unicomick</span></a>
+      <div class="searchbar" role="search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="global-search" type="text" placeholder="Search..." aria-label="Search" />
+        <kbd class="hint">Ctrl K</kbd>
+      </div>
+      <nav class="nav-links">
+        <div class="menu dropdown" id="cat-menu">
+          <button class="menu-btn" id="cat-toggle" aria-expanded="false">Categories <i class="fa-solid fa-chevron-down"></i></button>
+          <div class="dropdown-menu" id="cat-panel" hidden>
+            <a href="#">Most Popular Webtoon Right Now</a>
+            <a href="#">Most Popular Manga Right Now</a>
+            <a href="#">Browse Comics by Genre</a>
+            <a href="#">Popular Publishers</a>
+            <a href="#">Popular Groups</a>
+          </div>
+        </div>
+        <a href="/search" class="link">Search</a>
+        <a href="#" class="link">My List</a>
+      </nav>
+      <div class="nav-right">
+        <button class="icon-pill" title="Gender"><i class="fa-solid fa-venus-mars"></i></button>
+        <button class="icon-pill" title="Language"><i class="fa-solid fa-language"></i></button>
+        <a class="icon-pill" title="Profile" href="/profile" aria-label="Profile"><i class="fa-regular fa-user"></i></a>
+        <button class="icon-pill" title="More"><i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <main class="details-layout">
+      <section class="details-main">
+        <!-- Manga Header -->
+        <div class="details-hero panel">
+          <div class="hero-content">
+            <img id="manga-cover" src="https://placehold.co/300x400/1a202c/94a3b8?text=Loading" alt="Manga Cover" class="hero-cover">
+            <div class="hero-info">
+              <h1 id="manga-title" class="hero-title">Loading...</h1>
+              <div class="meta-tags">
+                <span class="tag"><i class="fa-solid fa-user"></i> <span id="manga-author">Loading...</span></span>
+                <span class="tag"><i class="fa-solid fa-tag"></i> <span id="manga-genre">Loading...</span></span>
+              </div>
+              <p id="manga-description" class="hero-description">Loading...</p>
+              <div class="action-buttons">
+                <button id="follow-btn" class="btn"><i class="fa-solid fa-heart"></i> Follow</button>
+                <button class="btn ghost"><i class="fa-solid fa-bookmark"></i> Add to List</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapters Section -->
+        <div class="chapters-section panel">
+          <div class="section-head">
+            <h3><i class="fa-solid fa-book-open"></i> Chapters</h3>
+            <div class="chapter-controls">
+              <button class="btn ghost small" id="sort-btn"><i class="fa-solid fa-arrow-down-short-wide"></i> Sort</button>
+            </div>
+          </div>
+          
+          <!-- Chapter Search Box -->
+          <div class="chapter-search-box" style="padding: 1rem; background: rgba(148, 163, 184, 0.05); border-radius: 8px; margin-bottom: 1rem;">
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <input 
+                type="text" 
+                id="chapter-search" 
+                placeholder="Search chapters... (e.g. 76)"
+                style="flex: 1; padding: 0.6rem 1rem; background: rgba(26, 32, 44, 0.8); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 6px; color: #e2e8f0; font-size: 0.9rem;"
+              />
+              <button 
+                id="search-chapter-btn" 
+                class="btn" 
+                style="padding: 0.6rem 1.5rem; white-space: nowrap;"
+              >
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+              </button>
+            </div>
+            <div id="search-results-info" style="margin-top: 0.5rem; font-size: 0.85rem; color: #94a3b8;"></div>
+          </div>
+          
+          <ul id="chapter-list" class="chapter-list">
+            <li class="status-message">Loading chapters...</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Sidebar -->
+      <aside class="details-sidebar">
+        <section class="panel">
+          <div class="section-head"><h4>Information</h4></div>
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">Status</span>
+              <span class="info-value" id="manga-status">Ongoing</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Chapters</span>
+              <span class="info-value" id="chapter-count">0</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Views</span>
+              <span class="info-value">1.2M</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Rating</span>
+              <span class="info-value">★ 4.8</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="section-head"><h4>Related Series</h4></div>
+          <ul class="side-list" id="related-list">
+            <li class="status-message">Loading...</li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Unicomick. All rights reserved.</p>
+  </footer>
+
+  <script type="module" src="/scripts/details.js"></script>
+</body>
+</html>
